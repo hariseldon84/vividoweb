@@ -3,11 +3,10 @@ import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 
 const pillLinks = [
-  { href: '/#edit',         label: 'Edit' },
-  { href: '/for-teams',     label: 'For Teams' },
-  { href: '/pricing',       label: 'Pricing' },
-  { href: '/roadmap',       label: 'Roadmap' },
-  { href: '/changelog',     label: 'Changelog' },
+  { href: '/#edit',     label: 'Edit' },
+  { href: '/for-teams', label: 'For Teams' },
+  { href: '/pricing',   label: 'Pricing' },
+  { href: '/roadmap',   label: 'Roadmap' },
 ]
 
 const mobileLinks = [
@@ -19,7 +18,6 @@ const mobileLinks = [
   { href: '/for-teams',       label: 'For Teams' },
   { href: '/pricing',         label: 'Pricing' },
   { href: '/roadmap',         label: 'Roadmap' },
-  { href: '/changelog',       label: 'Changelog' },
 ]
 
 export function Navbar() {
@@ -33,9 +31,7 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => {
-    setMenuOpen(false)
-  }, [location])
+  useEffect(() => { setMenuOpen(false) }, [location])
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
@@ -43,32 +39,24 @@ export function Navbar() {
   }, [menuOpen])
 
   const isHero = location.pathname === '/'
-  const textColor = isHero ? 'text-forest' : 'text-forest'
   const navBg = !isHero && scrolled ? 'bg-bg/95 backdrop-blur-md border-b border-border' : 'bg-transparent'
 
   return (
     <>
       <header className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${navBg}`}>
-        <nav className="flex items-center justify-between px-4 sm:px-6 md:px-10 h-36">
-          {/* Logo — frosted glass frame so it stays visible over video */}
-          <Link to="/" className="flex items-center shrink-0">
-            <div className="rounded-xl px-3 py-1.5" style={{ backgroundColor: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.55)' }}>
-              <img src="/logo.png" alt="Vivido" className="h-24 w-auto" />
-            </div>
-          </Link>
 
-          {/* Desktop pill nav */}
-          <div className="hidden lg:flex items-center gap-1 pill-nav rounded-full pl-6 pr-1 py-1">
-            {pillLinks.map((link, i) => (
+        {/* ── Desktop: logo centered, pill nav below ── */}
+        <div className="hidden lg:flex flex-col items-center pt-5 pb-3">
+          <Link to="/" className="flex items-center mb-3">
+            <img src="/logo.png" alt="Vivido" className="h-44 w-auto" />
+          </Link>
+          <div className="flex items-center gap-1 pill-nav rounded-full pl-6 pr-1 py-1">
+            {pillLinks.map((link) => (
               link.href.startsWith('/') && !link.href.includes('#') ? (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className={`text-sm px-3 py-2 transition-colors rounded-full ${
-                    i === 0
-                      ? 'font-semibold text-forest hover:text-moss'
-                      : 'font-medium text-sage hover:text-forest'
-                  }`}
+                  className="text-sm px-3 py-2 font-medium text-sage hover:text-forest transition-colors rounded-full"
                 >
                   {link.label}
                 </Link>
@@ -76,11 +64,7 @@ export function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`text-sm px-3 py-2 transition-colors rounded-full ${
-                    i === 0
-                      ? 'font-semibold text-forest hover:text-moss'
-                      : 'font-medium text-sage hover:text-forest'
-                  }`}
+                  className="text-sm px-3 py-2 font-medium text-sage hover:text-forest transition-colors rounded-full"
                 >
                   {link.label}
                 </a>
@@ -96,27 +80,23 @@ export function Navbar() {
               Get Early Access
             </Link>
           </div>
+        </div>
 
-          {/* Right side */}
-          <div className={`flex items-center gap-4 sm:gap-6 ${textColor}`}>
-            <Link
-              to="/early-access"
-              className="hidden sm:flex items-center gap-2 text-sm font-medium text-sage hover:text-forest transition-colors"
-            >
-              Join Waitlist
-            </Link>
+        {/* ── Mobile: logo left, hamburger right ── */}
+        <div className="lg:hidden flex items-center justify-between px-4 h-24">
+          <Link to="/" className="flex items-center shrink-0">
+            <img src="/logo.png" alt="Vivido" className="h-20 w-auto" />
+          </Link>
+          <button
+            onClick={() => setMenuOpen(v => !v)}
+            className="relative flex items-center justify-center w-10 h-10 rounded-full bg-white/70 backdrop-blur-md border border-white/60 text-forest transition-all duration-300 hover:bg-white/90"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          >
+            <Menu className={`w-5 h-5 absolute transition-all duration-300 ${menuOpen ? 'opacity-0 rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'}`} />
+            <X className={`w-5 h-5 absolute transition-all duration-300 ${menuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-50'}`} />
+          </button>
+        </div>
 
-            {/* Hamburger */}
-            <button
-              onClick={() => setMenuOpen(v => !v)}
-              className="lg:hidden relative flex items-center justify-center w-10 h-10 rounded-full bg-white/70 backdrop-blur-md border border-white/60 text-forest transition-all duration-300 hover:bg-white/90"
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            >
-              <Menu className={`w-5 h-5 absolute transition-all duration-300 ${menuOpen ? 'opacity-0 rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'}`} />
-              <X className={`w-5 h-5 absolute transition-all duration-300 ${menuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-50'}`} />
-            </button>
-          </div>
-        </nav>
       </header>
 
       {/* Mobile overlay */}
@@ -165,7 +145,8 @@ export function Navbar() {
             <Link
               to="/early-access"
               onClick={() => setMenuOpen(false)}
-              className="block w-full text-center bg-forest hover:bg-forest-hover text-white text-sm font-semibold px-5 py-3.5 rounded-full transition-colors"
+              className="block w-full text-center text-white text-sm font-semibold px-5 py-3.5 rounded-full transition-colors"
+              style={{ backgroundColor: '#1f2a1d' }}
             >
               Get Early Access
             </Link>

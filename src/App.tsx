@@ -6,7 +6,6 @@ import { Home } from './pages/Home'
 import { ForTeams } from './pages/ForTeams'
 import { Roadmap } from './pages/Roadmap'
 import { Pricing } from './pages/Pricing'
-import { Changelog } from './pages/Changelog'
 import { EarlyAccess } from './pages/EarlyAccess'
 import { Privacy } from './pages/Privacy'
 import { Terms } from './pages/Terms'
@@ -27,7 +26,6 @@ function Layout() {
         <Route path="/for-teams" element={<ForTeams />} />
         <Route path="/roadmap" element={<Roadmap />} />
         <Route path="/pricing" element={<Pricing />} />
-        <Route path="/changelog" element={<Changelog />} />
         <Route path="/early-access" element={<EarlyAccess />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />

@@ -16,7 +16,7 @@ const features = [
 
 export function Pricing() {
   return (
-    <main className="pt-40">
+    <main className="pt-28 lg:pt-72">
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-radial-violet opacity-50" />
         <div className="relative max-w-5xl mx-auto px-6">

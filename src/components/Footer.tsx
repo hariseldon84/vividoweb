@@ -11,7 +11,6 @@ const footerLinks = {
   Company: [
     { label: 'For Teams', href: '/for-teams' },
     { label: 'Roadmap',   href: '/roadmap' },
-    { label: 'Changelog', href: '/changelog' },
     { label: 'Pricing',   href: '/pricing' },
   ],
   Legal: [

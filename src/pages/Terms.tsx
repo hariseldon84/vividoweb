@@ -1,6 +1,6 @@
 export function Terms() {
   return (
-    <main className="pt-40">
+    <main className="pt-28 lg:pt-72">
       <div className="max-w-3xl mx-auto px-6 py-20">
         <h1 className="font-display text-4xl font-bold text-text mb-2">Terms of Service</h1>
         <p className="text-text-subtle text-sm mb-10">Effective date: June 1, 2026 · The Morning Company Pvt Ltd.</p>
@@ -13,8 +13,7 @@ export function Terms() {
               By accessing vividoapp.com or using the Vivido desktop application, you agree to these Terms of Service.
               If you do not agree, do not use Vivido. These terms form a legally binding agreement between you and
               The Morning Company Pvt Ltd. ("The Morning Company", "we", "us", or "our"), a company incorporated
-              under the laws of India, with its registered office at 97/3, Belleza, Emaar Marbella,
-              Sector 66, Gurugram, Haryana 122018, India.
+              under the laws of India.
             </p>
           </section>
 
@@ -139,8 +138,6 @@ export function Terms() {
                 legal@vividoapp.com
               </a>
               <br />
-              The Morning Company Pvt Ltd., 97/3, Belleza, Emaar Marbella,
-              Sector 66, Gurugram, Haryana 122018, India.
             </p>
           </section>
 

@@ -366,7 +366,7 @@ export function Home() {
       <section className="relative w-full min-h-screen sm:h-screen overflow-hidden">
         <BoomerangVideoBg src={BG_VIDEO} className="absolute inset-0 w-full h-full" />
 
-        <div className="relative z-10 flex flex-col items-center text-center pt-48 sm:pt-52 md:pt-56 px-4 sm:px-6">
+        <div className="relative z-10 flex flex-col items-center text-center pt-28 sm:pt-32 lg:pt-72 px-4 sm:px-6">
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold mb-8" style={{ backgroundColor: 'rgba(51,100,67,0.08)', border: '1px solid rgba(51,100,67,0.18)', color: '#336443' }}>
             <span className="w-1.5 h-1.5 rounded-full bg-moss animate-pulse" />
             Now accepting early access applications
@@ -378,7 +378,10 @@ export function Home() {
             The studio that learns{' '}
             <span style={{ color: '#85AB8B' }}>how you create</span>
           </h1>
-          <p className="mt-6 sm:mt-8 text-forest/70 text-sm sm:text-base md:text-lg leading-relaxed max-w-md">
+          <p
+            className="mt-6 sm:mt-8 text-sm sm:text-base md:text-lg leading-relaxed max-w-md rounded-2xl px-5 py-3"
+            style={{ color: 'rgba(31,42,29,0.80)', backgroundColor: 'rgba(255,255,255,0.60)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.50)' }}
+          >
             Record, edit, repurpose, and publish without leaving one app. Native Mac app. No browser. No limits.
           </p>
         </div>

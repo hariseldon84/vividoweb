@@ -1,6 +1,6 @@
 export function Privacy() {
   return (
-    <main className="pt-40">
+    <main className="pt-28 lg:pt-72">
       <div className="max-w-3xl mx-auto px-6 py-20">
         <h1 className="font-display text-4xl font-bold text-text mb-2">Privacy Policy</h1>
         <p className="text-text-subtle text-sm mb-10">Effective date: June 1, 2026 · The Morning Company Pvt Ltd.</p>
