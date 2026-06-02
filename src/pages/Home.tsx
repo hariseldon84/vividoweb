@@ -188,6 +188,10 @@ const features = [
 function StyleModelSection() {
   return (
     <section id="style-model" className="relative py-32 overflow-hidden" style={{ backgroundColor: '#1f2a1d' }}>
+      {/* Boomerang video background */}
+      <BoomerangVideoBg src="/creator_video_intelligence.mp4" className="absolute inset-0 w-full h-full" />
+      {/* Dark overlay so text stays readable */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(18,35,20,0.82) 0%, rgba(18,35,20,0.75) 50%, rgba(18,35,20,0.88) 100%)' }} />
       <div className="absolute inset-0 opacity-10 bg-grid-green" />
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
