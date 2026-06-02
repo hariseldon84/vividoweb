@@ -1,11 +1,71 @@
 import { useState } from 'react'
-import { Play, Sparkles, X } from 'lucide-react'
+import { Sparkles, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import BoomerangVideoBg from '../components/BoomerangVideoBg'
 import { Reveal } from '../components/Reveal'
 import { WaitlistForm } from '../components/WaitlistForm'
 
 const BG_VIDEO = '/hero_bg_video.mp4'
+
+const RECORD_MODES = ['Screen', 'Webcam', 'Both'] as const
+type RecordMode = typeof RECORD_MODES[number]
+const RECORD_VIDEOS: Record<RecordMode, string> = {
+  Screen: '/screenonly.mp4',
+  Webcam: '/webcamonly.mp4',
+  Both:   '/bothwebcamandscreen.mp4',
+}
+
+function RecordVisual() {
+  const [mode, setMode] = useState<RecordMode>('Webcam')
+  const [flashing, setFlashing] = useState(false)
+
+  const switchMode = (next: RecordMode) => {
+    if (next === mode) return
+    setFlashing(true)
+    setTimeout(() => {
+      setMode(next)
+      setTimeout(() => setFlashing(false), 80)
+    }, 100)
+  }
+
+  return (
+    <div className="mockup-frame p-5">
+      <div className="aspect-video rounded-lg relative overflow-hidden" style={{ backgroundColor: '#2d3a2a' }}>
+        {/* Pre-mount all 3 — instant channel switch, no reload */}
+        {RECORD_MODES.map((m) => (
+          <div
+            key={m}
+            className="absolute inset-0 transition-opacity duration-0"
+            style={{ opacity: mode === m ? 1 : 0, pointerEvents: mode === m ? 'auto' : 'none' }}
+          >
+            <BoomerangVideoBg src={RECORD_VIDEOS[m]} className="absolute inset-0 w-full h-full" />
+          </div>
+        ))}
+        {/* Channel-cut flash */}
+        <div
+          className="absolute inset-0 z-10 pointer-events-none"
+          style={{ backgroundColor: '#000', opacity: flashing ? 1 : 0, transition: flashing ? 'none' : 'opacity 80ms ease' }}
+        />
+      </div>
+      {/* Mode buttons */}
+      <div className="flex items-center gap-3 mt-4">
+        {RECORD_MODES.map((opt) => (
+          <button
+            key={opt}
+            onClick={() => switchMode(opt)}
+            className="flex-1 text-xs py-2 rounded-lg border transition-colors"
+            style={mode === opt
+              ? { borderColor: '#336443', color: '#336443', backgroundColor: 'rgba(51,100,67,0.06)' }
+              : { borderColor: '#D8D5CC', color: '#4b5b47', backgroundColor: 'transparent' }
+            }
+          >
+            {opt}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 const features = [
   {
@@ -15,27 +75,32 @@ const features = [
     body: 'Read your video like a document. Delete a sentence — the footage disappears. No timecodes, no scrubbing, no wasted hours hunting for the take you want.',
     bullets: ['Delete words, delete footage', 'Filler word removal in one click', 'Multi-language transcription', 'Low-confidence word highlighting'],
     side: 'right',
+    wide: true,
     visual: (
-      <div className="mockup-frame p-4 space-y-2">
-        <div className="flex items-center gap-2 mb-4">
-          <div className="w-2.5 h-2.5 rounded-full bg-red-400/60" />
-          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/60" />
-          <div className="w-2.5 h-2.5 rounded-full bg-green-400/60" />
+      <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ border: '1px solid #D8D5CC' }}>
+        {/* macOS title bar */}
+        <div className="flex items-center gap-1.5 px-4 py-3" style={{ backgroundColor: '#F0EEE8', borderBottom: '1px solid #D8D5CC' }}>
+          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'rgba(239,68,68,0.65)' }} />
+          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'rgba(234,179,8,0.65)' }} />
+          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'rgba(34,197,94,0.65)' }} />
           <span className="ml-2 text-xs font-mono" style={{ color: '#7a8a76' }}>transcript.vivido</span>
         </div>
-        {[
-          { text: "So today we're going to talk about", strike: false },
-          { text: 'um, uh, the new camera setup that I', strike: true },
-          { text: "built last month and honestly it's been", strike: false },
-          { text: 'like a game changer for my workflow.', strike: false },
-        ].map((line, i) => (
-          <div key={i} className={`flex items-center gap-2 rounded px-2 py-1 text-sm ${line.strike ? 'bg-red-50' : ''}`}>
-            <span className="text-xs w-6 text-right font-mono" style={{ color: '#7a8a76' }}>{i + 1}</span>
-            <span className={line.strike ? 'line-through text-red-400' : ''} style={line.strike ? {} : { color: '#1f2a1d' }}>{line.text}</span>
+        {/* Screenshot + bottom stat overlay */}
+        <div className="relative">
+          <img
+            src="/edit_by_talking.png"
+            alt="Transcript editing in Vivido — delete words, delete footage"
+            className="w-full block object-cover"
+          />
+          <div
+            className="absolute bottom-0 left-0 right-0 px-4 py-3 flex items-center gap-2"
+            style={{ background: 'linear-gradient(to top, rgba(14,20,14,0.80) 0%, transparent 100%)' }}
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7L5.5 10.5L12 3.5" stroke="#85AB8B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span className="text-xs font-semibold" style={{ color: '#85AB8B' }}>3 filler words removed · 00:04 saved</span>
           </div>
-        ))}
-        <div className="mt-4 flex items-center gap-2 text-xs pt-3" style={{ borderTop: '1px solid #D8D5CC' }}>
-          <span className="font-medium" style={{ color: '#336443' }}>3 filler words removed · 00:04 saved</span>
         </div>
       </div>
     ),
@@ -47,35 +112,7 @@ const features = [
     body: 'Record screen, webcam, or both — directly inside Vivido. No third-party recorder. No import step. Your footage is on disk before you finish recording.',
     bullets: ['Screen + webcam simultaneously', 'Local-first — files on your machine', 'Auto-project creation on stop', 'WAV audio, never compressed at capture'],
     side: 'left',
-    visual: (
-      <div className="mockup-frame p-5">
-        <div className="aspect-video rounded-lg flex items-center justify-center relative overflow-hidden" style={{ backgroundColor: '#2d3a2a' }}>
-          <div className="absolute inset-0 bg-gradient-to-br from-moss/20 to-transparent" />
-          <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ border: '2px solid rgba(133,171,139,0.5)' }}>
-            <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(133,171,139,0.15)' }}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="4" fill="#85AB8B"/>
-                <circle cx="12" cy="12" r="9" stroke="#85AB8B" strokeWidth="1.5" strokeDasharray="4 2"/>
-              </svg>
-            </div>
-          </div>
-          <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-            <div className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
-              <span className="text-xs font-mono" style={{ color: 'rgba(133,171,139,0.9)' }}>REC 00:03:42</span>
-            </div>
-            <span className="text-xs" style={{ color: 'rgba(133,171,139,0.7)' }}>4K · 60fps · WAV</span>
-          </div>
-        </div>
-        <div className="flex items-center gap-3 mt-4">
-          {['Screen', 'Webcam', 'Both'].map((opt, i) => (
-            <button key={opt} className={`flex-1 text-xs py-2 rounded-lg border transition-colors ${i === 2 ? 'border-moss text-moss bg-moss/5' : 'border-border'}`} style={i !== 2 ? { color: '#4b5b47' } : {}}>
-              {opt}
-            </button>
-          ))}
-        </div>
-      </div>
-    ),
+    visual: <RecordVisual />,
   },
   {
     id: 'sentinel-audio',
@@ -128,24 +165,22 @@ const features = [
     bullets: ['Shorts markers directly in timeline', 'Auto-reframe for vertical formats', 'Platform-specific metadata per clip', 'Chapter markers for YouTube'],
     side: 'left',
     visual: (
-      <div className="mockup-frame p-5">
-        <div className="grid grid-cols-3 gap-3">
-          {[
-            { platform: 'YouTube',   color: 'border-red-300/50 bg-red-50',  status: 'Ready' },
-            { platform: 'Shorts',    color: 'border-red-300/50 bg-red-50',  status: 'Reframing' },
-            { platform: 'Instagram', color: 'border-fern/30 bg-fern/5',     status: 'Ready' },
-          ].map((p) => (
-            <div key={p.platform} className={`border rounded-xl p-3 text-center ${p.color}`}>
-              <div className="aspect-video bg-bg/60 rounded mb-2 flex items-center justify-center">
-                <Play className="w-4 h-4" style={{ color: '#7a8a76', fill: '#7a8a76' }} />
-              </div>
-              <p className="text-xs font-medium" style={{ color: '#1f2a1d' }}>{p.platform}</p>
-              <p className="text-[10px] mt-0.5" style={{ color: '#7a8a76' }}>{p.status}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-4 flex items-center gap-2 text-xs border-t border-border pt-3">
-          <span className="text-moss font-medium">3 formats · 1 source edit</span>
+      <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ border: '1px solid #D8D5CC' }}>
+        <div className="relative">
+          <img
+            src="/onevideo_everywhere.png"
+            alt="One video repurposed for YouTube, Shorts, and Instagram"
+            className="w-full block object-contain"
+          />
+          <div
+            className="absolute bottom-0 left-0 right-0 px-4 py-3 flex items-center gap-2"
+            style={{ background: 'linear-gradient(to top, rgba(14,20,14,0.75) 0%, transparent 100%)' }}
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7L5.5 10.5L12 3.5" stroke="#85AB8B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span className="text-xs font-semibold" style={{ color: '#85AB8B' }}>3 formats · 1 source edit</span>
+          </div>
         </div>
       </div>
     ),
@@ -158,26 +193,29 @@ const features = [
     bullets: ['Title suggestions with CTR score (0–100)', 'AI description writer', 'Tag suggestions from transcript', 'Thumbnail slot in publish package'],
     side: 'right',
     visual: (
-      <div className="mockup-frame p-5 space-y-4">
-        <div>
-          <p className="text-xs mb-2 uppercase tracking-wider" style={{ color: '#7a8a76' }}>Title</p>
-          <div className="bg-bg rounded-lg p-3 flex items-center justify-between gap-3">
-            <p className="text-sm flex-1" style={{ color: '#1f2a1d' }}>I rebuilt my entire studio for under $500</p>
-            <div className="shrink-0 flex items-center gap-1.5">
-              <div className="w-8 h-8 rounded-full border-2 border-moss flex items-center justify-center">
-                <span className="text-[10px] font-bold text-moss">87</span>
-              </div>
-              <span className="text-[10px]" style={{ color: '#7a8a76' }}>CTR</span>
-            </div>
-          </div>
+      <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ border: '1px solid #D8D5CC' }}>
+        {/* macOS title bar */}
+        <div className="flex items-center gap-1.5 px-4 py-3" style={{ backgroundColor: '#F0EEE8', borderBottom: '1px solid #D8D5CC' }}>
+          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'rgba(239,68,68,0.65)' }} />
+          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'rgba(234,179,8,0.65)' }} />
+          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'rgba(34,197,94,0.65)' }} />
+          <span className="ml-2 text-xs font-mono" style={{ color: '#7a8a76' }}>publish.vivido</span>
         </div>
-        <div>
-          <p className="text-xs mb-2 uppercase tracking-wider" style={{ color: '#7a8a76' }}>Tags</p>
-          <div className="flex flex-wrap gap-1.5">
-            {['studio setup', 'budget studio', 'home studio', 'youtube setup'].map((tag) => (
-              <span key={tag} className="text-xs bg-surface border border-border text-sage px-2 py-0.5 rounded-full">{tag}</span>
-            ))}
-            <button className="text-xs text-moss border border-moss/30 px-2 py-0.5 rounded-full hover:bg-moss/5 transition-colors">+ Add more</button>
+        {/* Screenshot + bottom stat overlay */}
+        <div className="relative">
+          <img
+            src="/aigen_dashboard.png"
+            alt="Vivido Smart Publish — AI title suggestions, CTR scores and tags"
+            className="w-full block object-cover"
+          />
+          <div
+            className="absolute bottom-0 left-0 right-0 px-4 py-3 flex items-center gap-2"
+            style={{ background: 'linear-gradient(to top, rgba(14,20,14,0.80) 0%, transparent 100%)' }}
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7L5.5 10.5L12 3.5" stroke="#85AB8B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span className="text-xs font-semibold" style={{ color: '#85AB8B' }}>AI title · 92 CTR score · auto-tagged</span>
           </div>
         </div>
       </div>
@@ -276,38 +314,27 @@ function ForTeamsSection() {
             </Reveal>
           </div>
           <Reveal delay={200}>
-            <div className="mockup-frame p-6">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <p className="text-sm font-semibold" style={{ color: '#1f2a1d' }}>Brand Workspace</p>
-                  <p className="text-xs text-sage">4 members · 12 projects</p>
-                </div>
-                <div className="flex -space-x-2">
-                  {['A', 'M', 'R', 'J'].map((initial, i) => (
-                    <div key={i} className="w-8 h-8 rounded-full bg-moss/20 border-2 border-surface-elevated flex items-center justify-center text-xs font-semibold text-moss">{initial}</div>
-                  ))}
-                </div>
+            <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ border: '1px solid #D8D5CC' }}>
+              <div className="flex items-center gap-1.5 px-4 py-3" style={{ backgroundColor: '#F0EEE8', borderBottom: '1px solid #D8D5CC' }}>
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'rgba(239,68,68,0.65)' }} />
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'rgba(234,179,8,0.65)' }} />
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'rgba(34,197,94,0.65)' }} />
+                <span className="ml-2 text-xs font-mono" style={{ color: '#7a8a76' }}>teams.vivido</span>
               </div>
-              <div className="space-y-3">
-                <div className="bg-bg rounded-xl p-4">
-                  <p className="text-xs mb-3 uppercase tracking-wider" style={{ color: '#7a8a76' }}>Brand Kit</p>
-                  <div className="flex gap-2 mb-3">
-                    {['#1f2a1d', '#336443', '#85AB8B', '#FAFAF8'].map((color) => (
-                      <div key={color} className="w-8 h-8 rounded-lg border border-border" style={{ backgroundColor: color }} />
-                    ))}
-                  </div>
-                  <div className="flex gap-2 text-xs">
-                    <span className="bg-surface border border-border px-2 py-1 rounded text-sage">Neue Haas Grotesk</span>
-                    <span className="bg-surface border border-border px-2 py-1 rounded text-sage">Inter Body</span>
-                  </div>
-                </div>
-                <div className="grid grid-cols-3 gap-2">
-                  {['Q3 Ep 12', 'Product Demo', 'CEO Interview'].map((proj) => (
-                    <div key={proj} className="bg-bg rounded-lg p-2.5">
-                      <div className="aspect-video bg-surface rounded mb-1.5" />
-                      <p className="text-[10px] text-sage truncate">{proj}</p>
-                    </div>
-                  ))}
+              <div className="relative">
+                <img
+                  src="/teamview.png"
+                  alt="Vivido team workspace — shared brand kit, style guide and projects"
+                  className="w-full block object-cover"
+                />
+                <div
+                  className="absolute bottom-0 left-0 right-0 px-4 py-3 flex items-center gap-2"
+                  style={{ background: 'linear-gradient(to top, rgba(14,20,14,0.80) 0%, transparent 100%)' }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M2 7L5.5 10.5L12 3.5" stroke="#85AB8B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <span className="text-xs font-semibold" style={{ color: '#85AB8B' }}>Brand kit · shared library · team handoffs</span>
                 </div>
               </div>
             </div>
@@ -338,7 +365,7 @@ export function Home() {
         <div className="relative z-10 flex flex-col items-center text-center pt-24 sm:pt-28 lg:pt-32 px-4 sm:px-6">
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold mb-8" style={{ backgroundColor: 'rgba(51,100,67,0.08)', border: '1px solid rgba(51,100,67,0.18)', color: '#336443' }}>
             <span className="w-1.5 h-1.5 rounded-full bg-moss animate-pulse" />
-            Now accepting early access applications
+            The all-in-one studio for video creators
           </div>
           <h1
             className="font-normal leading-[0.95] text-[2rem] sm:text-4xl md:text-5xl lg:text-[4.75rem] xl:text-[5.25rem] max-w-5xl text-balance"
@@ -347,12 +374,26 @@ export function Home() {
             The studio that learns{' '}
             <span style={{ color: '#85AB8B' }}>how you create</span>
           </h1>
+          {/* Line 1 — intelligence proof */}
           <p
             className="mt-6 sm:mt-8 text-sm sm:text-base md:text-lg leading-relaxed max-w-md rounded-2xl px-5 py-3"
             style={{ color: 'rgba(31,42,29,0.80)', backgroundColor: 'rgba(255,255,255,0.60)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.50)' }}
           >
-            Record, edit, repurpose, and publish without leaving one app. Native Mac app. No browser. No limits.
+            Your hook length. Your cut rhythm. Your style.
           </p>
+
+          {/* Line 2 — capability chips */}
+          <div className="flex flex-wrap justify-center gap-2 mt-4 max-w-sm">
+            {['Record', 'AI Editing', 'YouTube', 'Reels', 'Shorts', 'Captions', 'Stream', 'Publish'].map((cap) => (
+              <span
+                key={cap}
+                className="text-xs font-medium px-3 py-1.5 rounded-full"
+                style={{ backgroundColor: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: '1px solid rgba(51,100,67,0.18)', color: '#4b5b47' }}
+              >
+                {cap}
+              </span>
+            ))}
+          </div>
 
           {/* CTA + platform chip */}
           <div className="flex flex-col items-center gap-3 mt-8">
@@ -431,7 +472,7 @@ export function Home() {
       {features.map((feature) => (
         <section key={feature.id} id={feature.id} className="py-24 border-t border-border">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className={`grid grid-cols-1 gap-16 items-center ${feature.wide ? 'lg:grid-cols-[47fr_53fr]' : 'lg:grid-cols-2'}`}>
               <div className={feature.side === 'left' ? 'lg:order-2' : ''}>
                 <Reveal><span className="section-badge">{feature.badge}</span></Reveal>
                 <Reveal delay={100}>
