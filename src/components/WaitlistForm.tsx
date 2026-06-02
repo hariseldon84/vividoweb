@@ -15,10 +15,6 @@ function getUtmParams() {
   }
 }
 
-function referralSlug(email: string) {
-  return email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g, '')
-}
-
 const Spinner = () => (
   <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -26,17 +22,7 @@ const Spinner = () => (
   </svg>
 )
 
-function SuccessView({ email, alreadyOnList }: { email: string; alreadyOnList?: boolean }) {
-  const slug = referralSlug(email)
-  const refUrl = `https://vividoapp.com/ref/${slug}`
-  const [copied, setCopied] = useState(false)
-
-  const copy = () => {
-    navigator.clipboard.writeText(refUrl)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
+function SuccessView({ alreadyOnList }: { alreadyOnList?: boolean }) {
   return (
     <div className="flex flex-col items-center gap-3 py-4">
       <div className="w-12 h-12 rounded-full flex items-center justify-center"
@@ -50,19 +36,8 @@ function SuccessView({ email, alreadyOnList }: { email: string; alreadyOnList?: 
           {alreadyOnList ? "You're already on the list." : "You're on the list."}
         </p>
         <p className="text-sm mt-1" style={{ color: '#4b5b47' }}>
-          Share your unique link to jump the queue — every 3 referrals move you up.
+          We'll email you when early access opens.
         </p>
-      </div>
-      <div className="flex items-center gap-2 rounded-lg px-4 py-2.5 w-full max-w-sm"
-        style={{ backgroundColor: '#F0EEE8', border: '1px solid #D8D5CC' }}>
-        <span className="text-xs truncate flex-1" style={{ color: '#4b5b47' }}>{refUrl}</span>
-        <button
-          onClick={copy}
-          className="text-xs font-medium shrink-0 transition-colors"
-          style={{ color: '#336443' }}
-        >
-          {copied ? 'Copied!' : 'Copy'}
-        </button>
       </div>
     </div>
   )
@@ -122,8 +97,8 @@ export function WaitlistForm({ variant = 'inline' }: WaitlistFormProps) {
     }
   }
 
-  if (formState === 'success') return <SuccessView email={email} />
-  if (formState === 'duplicate') return <SuccessView email={email} alreadyOnList />
+  if (formState === 'success') return <SuccessView />
+  if (formState === 'duplicate') return <SuccessView alreadyOnList />
 
   // ── Hero variant: single-line email + CTA ──────────────────────────────────
   if (variant === 'hero') {
@@ -238,7 +213,7 @@ export function WaitlistForm({ variant = 'inline' }: WaitlistFormProps) {
       </button>
 
       <p className="text-xs text-center" style={{ color: '#7a8a76' }}>
-        Refer 3 friends → jump the queue. No spam, ever.
+        No spam, ever. We'll email you when early access opens.
       </p>
     </form>
   )
