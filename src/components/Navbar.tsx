@@ -75,11 +75,13 @@ export function Navbar() {
         className="fixed top-0 left-0 right-0 z-30"
         style={{
           height: `${NAV_H}px`,
-          backgroundColor: scrolled ? 'rgba(250,250,248,0.92)' : 'transparent',
+          background: scrolled
+            ? 'rgba(250,250,248,0.92)'
+            : 'linear-gradient(to right, rgba(250,248,244,0.28) 0%, transparent 20%)',
           backdropFilter: scrolled ? 'blur(16px)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
           borderBottom: scrolled ? '1px solid rgba(216,213,204,0.45)' : '1px solid transparent',
-          transition: 'background-color 0.35s ease, backdrop-filter 0.35s ease, border-color 0.35s ease',
+          transition: 'background 0.35s ease, backdrop-filter 0.35s ease, border-color 0.35s ease',
         }}
       >
         {/* ── Desktop: mark left | nav center | CTA right ── */}
