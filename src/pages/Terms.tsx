@@ -3,7 +3,7 @@ export function Terms() {
     <main className="pt-24 lg:pt-28">
       <div className="max-w-3xl mx-auto px-6 py-20">
         <h1 className="font-display text-4xl font-bold text-text mb-2">Terms of Service</h1>
-        <p className="text-text-subtle text-sm mb-10">Effective date: June 1, 2026 · The Morning Company Pvt Ltd.</p>
+        <p className="text-text-subtle text-sm mb-10">Effective date: June 1, 2026 · Anand Arora</p>
 
         <div className="prose prose-invert max-w-none space-y-8 text-text-muted text-sm leading-relaxed">
 
@@ -12,8 +12,7 @@ export function Terms() {
             <p>
               By accessing vividoapp.com or using the Vivido desktop application, you agree to these Terms of Service.
               If you do not agree, do not use Vivido. These terms form a legally binding agreement between you and
-              The Morning Company Pvt Ltd. ("The Morning Company", "we", "us", or "our"), a company incorporated
-              under the laws of India.
+              Anand Arora ("we", "us", or "our"), the individual maintainer of Vivido.
             </p>
           </section>
 
@@ -31,7 +30,6 @@ export function Terms() {
             <ul className="list-disc pl-5 space-y-2">
               <li>Joining the waitlist is free and does not obligate you to purchase.</li>
               <li>Joining the waitlist reserves your early access pricing, not your access date — access timing is at our discretion.</li>
-              <li>Referral queue position is calculated based on verified referrals. We reserve the right to disqualify fraudulent referrals.</li>
               <li>We may change the early access pricing before launch. Waitlist members who have signed up before a price change will be notified by email.</li>
             </ul>
           </section>
@@ -105,7 +103,7 @@ export function Terms() {
           <section>
             <h2 className="text-text font-semibold text-lg mb-3">10. Limitation of liability</h2>
             <p>
-              To the maximum extent permitted by law, The Morning Company's total liability to you for any
+              To the maximum extent permitted by law, Anand Arora's total liability to you for any
               claim arising under these terms shall not exceed the amount you paid for Vivido in the 12 months
               preceding the claim. We are not liable for indirect, incidental, special, consequential,
               or punitive damages of any kind.

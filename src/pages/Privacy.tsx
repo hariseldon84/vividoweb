@@ -3,16 +3,16 @@ export function Privacy() {
     <main className="pt-24 lg:pt-28">
       <div className="max-w-3xl mx-auto px-6 py-20">
         <h1 className="font-display text-4xl font-bold text-text mb-2">Privacy Policy</h1>
-        <p className="text-text-subtle text-sm mb-10">Effective date: June 1, 2026 · The Morning Company Pvt Ltd.</p>
+        <p className="text-text-subtle text-sm mb-10">Effective date: June 1, 2026 · Anand Arora</p>
 
         <div className="prose prose-invert max-w-none space-y-8 text-text-muted text-sm leading-relaxed">
 
           <section>
             <h2 className="text-text font-semibold text-lg mb-3">1. Who we are</h2>
             <p>
-              Vivido is a product of The Morning Company Pvt Ltd., a company incorporated in India.
+              Vivido is a product independently maintained by Anand Arora.
               We operate the website at vividoapp.com and the Vivido desktop application for macOS.
-              References to "we", "us", or "our" in this policy refer to The Morning Company Pvt Ltd.
+              References to "we", "us", or "our" in this policy refer to Anand Arora.
             </p>
           </section>
 
@@ -22,7 +22,6 @@ export function Privacy() {
             <ul className="list-disc pl-5 space-y-2">
               <li><strong className="text-text">Email address</strong> — collected when you join the waitlist. Used to send you product updates and your early access invitation.</li>
               <li><strong className="text-text">YouTube channel URL</strong> — optionally provided at waitlist signup. Used to understand our creator audience and prioritise access.</li>
-              <li><strong className="text-text">Referral activity</strong> — we track how many people you have referred via your unique referral link to determine queue position.</li>
               <li><strong className="text-text">Usage analytics</strong> — we collect anonymised, aggregated analytics about how the website and app are used. No personally identifiable information is included.</li>
             </ul>
           </section>
@@ -32,7 +31,6 @@ export function Privacy() {
             <ul className="list-disc pl-5 space-y-2">
               <li>To notify you when early access opens</li>
               <li>To send you product updates (you may unsubscribe at any time)</li>
-              <li>To manage waitlist position via referral tracking</li>
               <li>To improve the product based on aggregated usage patterns</li>
             </ul>
             <p className="mt-3">We do not sell your personal data. We do not use your data for advertising targeting.</p>
@@ -143,7 +141,7 @@ export function Privacy() {
                 privacy@vividoapp.com
               </a>
               <br />
-              The Morning Company Pvt Ltd., Gurugram, Haryana, India.
+              Anand Arora — Vivido
             </p>
           </section>
         </div>
