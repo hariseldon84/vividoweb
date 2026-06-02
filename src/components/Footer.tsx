@@ -2,11 +2,9 @@ import { Link } from 'react-router-dom'
 import { VividoBrand } from './VividoBrand'
 
 const links = [
-  { label: 'Edit',             href: '/#edit' },
-  { label: 'For Teams',        href: '/for-teams' },
-  { label: 'Pricing',          href: '/pricing' },
-  { label: 'Privacy Policy',   href: '/privacy' },
-  { label: 'Terms of Service', href: '/terms' },
+  { label: 'Edit',      href: '/#edit' },
+  { label: 'For Teams', href: '/for-teams' },
+  { label: 'Pricing',   href: '/pricing' },
 ]
 
 export function Footer() {
@@ -80,10 +78,22 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-6 flex items-center justify-center" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+        <div className="mt-8 pt-6 flex items-center justify-between" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
           <p className="text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>
             © {new Date().getFullYear()} Vivido. All rights reserved.
           </p>
+          <div className="flex items-center gap-4">
+            <Link to="/privacy" className="text-xs transition-colors" style={{ color: 'rgba(255,255,255,0.18)' }}
+              onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.18)')}>
+              Privacy
+            </Link>
+            <Link to="/terms" className="text-xs transition-colors" style={{ color: 'rgba(255,255,255,0.18)' }}
+              onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.18)')}>
+              Terms
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
