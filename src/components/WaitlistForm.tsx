@@ -100,7 +100,9 @@ export function WaitlistForm({ variant = 'inline' }: WaitlistFormProps) {
         }),
       })
 
-      const data = await res.json() as { ok?: boolean; error?: string }
+      // Parse JSON defensively — a server crash returns text/html, not JSON
+      let data: { ok?: boolean; error?: string } = {}
+      try { data = await res.json() } catch { /* non-JSON response */ }
 
       if (res.status === 409 || data.error === 'already_on_waitlist') {
         setFormState('duplicate')

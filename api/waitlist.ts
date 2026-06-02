@@ -1,4 +1,13 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node'
+// Minimal inline types — avoids @vercel/node import which caused
+// "type":"module" vs CommonJS compilation conflict at runtime
+interface Req {
+  method?: string
+  body: Record<string, string>
+}
+interface Res {
+  status(code: number): Res
+  json(data: unknown): void
+}
 
 const NOTION_TOKEN = process.env.NOTION_TOKEN
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID
@@ -35,7 +44,7 @@ function richText(value: string) {
   return { rich_text: [{ text: { content: value.slice(0, 2000) } }] }
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: Req, res: Res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
@@ -53,9 +62,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     referrer,
     utmSource,
     utmCampaign,
-  } = req.body as Record<string, string>
+  } = req.body
 
-  // Honeypot: silently accept so bots don't know they failed
   if (_hp) {
     return res.status(200).json({ ok: true })
   }
@@ -69,15 +77,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(409).json({ error: 'already_on_waitlist' })
     }
 
-    // Derive a readable source label from the page URL path
     let sourceLabel = 'Website'
     if (pageUrl) {
       try {
-        const path = new URL(pageUrl).pathname
-        if (path === '/' || path === '') sourceLabel = 'Home'
-        else if (path.includes('early-access')) sourceLabel = 'Early Access'
-        else if (path.includes('pricing')) sourceLabel = 'Pricing'
-        else if (path.includes('for-teams')) sourceLabel = 'For Teams'
+        const pathname = new URL(pageUrl).pathname
+        if (pathname === '/' || pathname === '') sourceLabel = 'Home'
+        else if (pathname.includes('early-access')) sourceLabel = 'Early Access'
+        else if (pathname.includes('pricing')) sourceLabel = 'Pricing'
+        else if (pathname.includes('for-teams')) sourceLabel = 'For Teams'
       } catch { /* ignore invalid URL */ }
     }
 

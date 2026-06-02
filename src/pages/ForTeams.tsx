@@ -68,7 +68,7 @@ const capabilities = [
 
 export function ForTeams() {
   return (
-    <main className="pt-28 lg:pt-72">
+    <main className="pt-24 lg:pt-28">
       {/* Hero */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-radial-violet opacity-50" />

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { VividoBrand } from './VividoBrand'
 
 const footerLinks = {
   Product: [
@@ -21,13 +22,13 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer style={{ backgroundColor: '#1f2a1d', borderTop: '1px solid #2d3a2a' }}>
+    <footer style={{ backgroundColor: '#123C2A', borderTop: '1px solid #1a5238' }}>
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-12">
           {/* Brand */}
           <div className="col-span-2">
-            <Link to="/" className="flex items-center mb-5">
-              <img src="/logo-white.png" alt="Vivido" className="h-32 w-auto" />
+            <Link to="/" className="flex items-center mb-5" aria-label="Vivido home">
+              <VividoBrand markSize={48} color="rgba(255,255,255,0.90)" />
             </Link>
             <p className="text-sm max-w-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)' }}>
               The all-in-one studio for YouTube creators. Coming soon to Mac.
@@ -95,7 +96,7 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-16 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid #2d3a2a' }}>
+        <div className="mt-16 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid #1a5238' }}>
           <p className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
             © {new Date().getFullYear()} The Morning Company Pvt Ltd. All rights reserved.
           </p>

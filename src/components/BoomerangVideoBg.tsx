@@ -138,7 +138,6 @@ export default function BoomerangVideoBg({ src, className }: Props) {
         muted
         playsInline
         preload="auto"
-        crossOrigin="anonymous"
       />
       <canvas
         ref={displayCanvasRef}

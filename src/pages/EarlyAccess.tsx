@@ -3,7 +3,7 @@ import { WaitlistForm } from '../components/WaitlistForm'
 
 export function EarlyAccess() {
   return (
-    <main className="pt-32 lg:pt-72 min-h-screen flex items-center" style={{ backgroundColor: '#FAFAF8' }}>
+    <main className="pt-24 lg:pt-28 min-h-screen flex items-center" style={{ backgroundColor: '#FAFAF8' }}>
       <section className="w-full py-20">
         <div className="max-w-2xl mx-auto px-6">
           <Reveal>

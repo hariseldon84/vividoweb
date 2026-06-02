@@ -1,11 +1,11 @@
-import { Play, Sparkles } from 'lucide-react'
+import { useState } from 'react'
+import { Play, Sparkles, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import BoomerangVideoBg from '../components/BoomerangVideoBg'
 import { Reveal } from '../components/Reveal'
 import { WaitlistForm } from '../components/WaitlistForm'
 
-const BG_VIDEO =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260511_131941_d136af49-e243-493a-be14-6ff3f24e09e6.mp4'
+const BG_VIDEO = '/hero_bg_video.mp4'
 
 const features = [
   {
@@ -360,13 +360,23 @@ function ForTeamsSection() {
 }
 
 export function Home() {
+  const [styleCardVisible, setStyleCardVisible] = useState(true)
+
   return (
     <main>
       {/* Hero */}
       <section className="relative w-full min-h-screen sm:h-screen overflow-hidden">
         <BoomerangVideoBg src={BG_VIDEO} className="absolute inset-0 w-full h-full" />
 
-        <div className="relative z-10 flex flex-col items-center text-center pt-28 sm:pt-32 lg:pt-72 px-4 sm:px-6">
+        {/* Radial overlay — soft cream halo behind the text, transparent at edges */}
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 70% 60% at 50% 42%, rgba(250,248,244,0.72) 0%, rgba(250,248,244,0.38) 45%, transparent 75%)',
+          }}
+        />
+
+        <div className="relative z-10 flex flex-col items-center text-center pt-24 sm:pt-28 lg:pt-32 px-4 sm:px-6">
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold mb-8" style={{ backgroundColor: 'rgba(51,100,67,0.08)', border: '1px solid rgba(51,100,67,0.18)', color: '#336443' }}>
             <span className="w-1.5 h-1.5 rounded-full bg-moss animate-pulse" />
             Now accepting early access applications
@@ -386,24 +396,42 @@ export function Home() {
           </p>
         </div>
 
-        {/* Bottom-left CTA — frosted glass box so text stays readable over video */}
-        <div className="absolute left-4 right-4 sm:right-auto sm:left-6 md:left-10 bottom-6 sm:bottom-8 md:bottom-10 z-10 max-w-sm rounded-2xl px-5 py-4" style={{ backgroundColor: 'rgba(250,250,248,0.72)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.60)' }}>
-          <div className="flex items-center gap-2 mb-2" style={{ color: '#3d5638' }}>
-            <Sparkles className="w-4 h-4" />
-            <span className="text-sm font-semibold">Style Model<sup className="text-[10px]">™</sup></span>
+        {/* Bottom-left CTA — frosted glass card, dismissible */}
+        {styleCardVisible && (
+          <div
+            className="absolute left-4 right-4 sm:right-auto sm:left-6 md:left-10 bottom-6 sm:bottom-8 md:bottom-10 z-10 max-w-sm rounded-2xl px-5 py-4"
+            style={{ backgroundColor: 'rgba(250,250,248,0.72)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.60)' }}
+          >
+            {/* Header row with title + close button */}
+            <div className="flex items-start justify-between gap-2 mb-2">
+              <div className="flex items-center gap-2" style={{ color: '#3d5638' }}>
+                <Sparkles className="w-4 h-4 shrink-0" />
+                <span className="text-sm font-semibold">Style Model<sup className="text-[10px]">™</sup></span>
+              </div>
+              <button
+                onClick={() => setStyleCardVisible(false)}
+                className="shrink-0 rounded-full p-1 transition-colors -mt-0.5 -mr-1"
+                style={{ color: 'rgba(61,86,56,0.50)' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#3d5638')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(61,86,56,0.50)')}
+                aria-label="Dismiss"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+            <p className="text-xs leading-relaxed mb-4 max-w-xs font-medium" style={{ color: 'rgba(61,86,56,0.80)' }}>
+              Vivido learns your editing style across every project — hook length, cut rhythm, B-roll ratio — and helps you replicate what works.
+            </p>
+            <div className="flex items-center gap-4 flex-wrap">
+              <Link to="/early-access" className="text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors shadow-sm" style={{ backgroundColor: '#3d5638' }}>
+                Get Early Access
+              </Link>
+              <Link to="/pricing" className="text-sm font-semibold hover:opacity-80 transition-opacity" style={{ color: '#3d5638' }}>
+                See pricing →
+              </Link>
+            </div>
           </div>
-          <p className="text-xs leading-relaxed mb-4 max-w-xs font-medium" style={{ color: 'rgba(61,86,56,0.80)' }}>
-            Vivido learns your editing style across every project — hook length, cut rhythm, B-roll ratio — and helps you replicate what works.
-          </p>
-          <div className="flex items-center gap-4 flex-wrap">
-            <Link to="/early-access" className="text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors shadow-sm" style={{ backgroundColor: '#3d5638' }}>
-              Get Early Access
-            </Link>
-            <Link to="/pricing" className="text-sm font-semibold hover:opacity-80 transition-opacity" style={{ color: '#3d5638' }}>
-              See pricing →
-            </Link>
-          </div>
-        </div>
+        )}
       </section>
 
       {/* Feature sections */}
