@@ -187,82 +187,37 @@ const features = [
 
 function StyleModelSection() {
   return (
-    <section id="style-model" className="relative py-32 overflow-hidden" style={{ backgroundColor: '#1f2a1d' }}>
-      {/* Boomerang video background */}
+    <section id="style-model" className="relative py-56 overflow-hidden" style={{ backgroundColor: '#0e0c0a' }}>
       <BoomerangVideoBg src="/creator_video_intelligence.mp4" className="absolute inset-0 w-full h-full" />
-      {/* Dark overlay so text stays readable */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(18,35,20,0.82) 0%, rgba(18,35,20,0.75) 50%, rgba(18,35,20,0.88) 100%)' }} />
-      <div className="absolute inset-0 opacity-10 bg-grid-green" />
-      <div className="relative max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <Reveal>
-            <span className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase mb-6" style={{ color: '#85AB8B', backgroundColor: 'rgba(133,171,139,0.12)', border: '1px solid rgba(133,171,139,0.25)' }}>
-              <Sparkles className="w-3 h-3" />
-              Vivido Intelligence
-            </span>
-          </Reveal>
-          <Reveal delay={100}>
-            <h2
-              className="text-4xl md:text-6xl font-normal mt-6 leading-[0.95] text-balance"
-              style={{ fontFamily: '"JA JayaGiri Sans", "Neue Haas Grotesk Display Pro 55 Roman", sans-serif', letterSpacing: '-0.035em', color: '#ffffff' }}
-            >
-              Vivido learns how you edit.{' '}
-              <span style={{ color: '#85AB8B' }}>Then helps you do it faster.</span>
-            </h2>
-          </Reveal>
-          <Reveal delay={200}>
-            <p className="text-lg mt-6 max-w-2xl mx-auto leading-relaxed" style={{ color: 'rgba(133,171,139,0.80)' }}>
-              Every project teaches Vivido your style. Your hook length. Your cut rhythm. Your B-roll ratio.
-              After five projects, it starts surfacing insights — and helping you replicate what works.
-            </p>
-          </Reveal>
-        </div>
-        <Reveal delay={300}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-            {[
-              { icon: '⏱', label: 'Hook Intelligence', value: '47s avg', desc: 'Opening before first cut', trend: '+3s vs last 5 videos' },
-              { icon: '✂️', label: 'Cut Rhythm', value: '2.3s', desc: 'Average clip duration', trend: 'Consistent with your style' },
-              { icon: '🎬', label: 'B-Roll Ratio', value: '34%', desc: 'B-roll vs primary camera', trend: 'Up 8% from project 1' },
-              { icon: '📊', label: 'Drop-off Point', value: '8:12', desc: 'Where viewers drop off', trend: 'Improving across projects' },
-            ].map((stat) => (
-              <div key={stat.label} className="rounded-2xl p-6" style={{ backgroundColor: '#2d3a2a', border: '1px solid #2a3827' }}>
-                <div className="text-2xl mb-3">{stat.icon}</div>
-                <p className="text-xs uppercase tracking-wider mb-1" style={{ color: 'rgba(133,171,139,0.75)' }}>{stat.label}</p>
-                <p className="text-3xl font-bold mb-1" style={{ color: '#ffffff' }}>{stat.value}</p>
-                <p className="text-xs mb-3" style={{ color: 'rgba(133,171,139,0.75)' }}>{stat.desc}</p>
-                <p className="text-xs pt-3" style={{ borderTop: '1px solid #3a4d38', color: '#85AB8B' }}>{stat.trend}</p>
-              </div>
-            ))}
-          </div>
+      {/* Warm near-black tint — light enough to let video breathe */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(14,12,10,0.62) 0%, rgba(14,12,10,0.28) 50%, rgba(14,12,10,0.10) 100%)' }} />
+      <div className="relative max-w-4xl mx-auto px-6 text-center">
+        <Reveal>
+          <span className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase mb-6" style={{ color: 'rgba(250,248,244,0.75)', backgroundColor: 'rgba(250,248,244,0.10)', border: '1px solid rgba(250,248,244,0.18)' }}>
+            <Sparkles className="w-3 h-3" />
+            Vivido Intelligence
+          </span>
         </Reveal>
-        <Reveal delay={400}>
-          <div className="rounded-2xl p-8" style={{ backgroundColor: '#2d3a2a', border: '1px solid rgba(133,171,139,0.2)' }}>
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="w-2 h-2 rounded-full bg-fern animate-pulse-slow" />
-                  <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#85AB8B' }}>Style Model · Project 8 of ∞</span>
-                </div>
-                <h3 className="text-xl font-bold mb-4" style={{ color: '#ffffff' }}>3 observations about your editing style</h3>
-                <ul className="space-y-3">
-                  {[
-                    'Your hooks under 45s have 23% better retention. Consider tightening this one.',
-                    "You've removed filler words in 7 of 8 projects. Sentinel handles this automatically now.",
-                    'Your best-performing videos had 38% B-roll. This project is at 29%.',
-                  ].map((obs, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm" style={{ color: 'rgba(133,171,139,0.90)' }}>
-                      <span className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-xs font-semibold mt-0.5" style={{ backgroundColor: 'rgba(133,171,139,0.15)', border: '1px solid rgba(133,171,139,0.35)', color: '#85AB8B' }}>{i + 1}</span>
-                      {obs}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="shrink-0 flex flex-col gap-2">
-                <button className="font-semibold text-sm py-2.5 px-5 rounded-full transition-colors" style={{ backgroundColor: '#85AB8B', color: '#1f2a1d' }}>Apply suggestions</button>
-                <button className="font-medium text-sm py-2.5 px-5 rounded-full transition-colors" style={{ border: '1px solid rgba(133,171,139,0.50)', color: '#85AB8B' }}>Dismiss</button>
-                <p className="text-xs text-center" style={{ color: 'rgba(133,171,139,0.60)' }}>You decide. Always.</p>
-              </div>
-            </div>
+        <Reveal delay={100}>
+          <h2
+            className="text-4xl md:text-6xl font-normal mt-6 leading-[0.95] text-balance"
+            style={{ fontFamily: '"JA JayaGiri Sans", "Neue Haas Grotesk Display Pro 55 Roman", sans-serif', letterSpacing: '-0.035em', color: '#ffffff' }}
+          >
+            Vivido learns how you edit.{' '}
+            <span style={{ color: 'rgba(250,248,244,0.60)' }}>Then helps you do it faster.</span>
+          </h2>
+        </Reveal>
+        <Reveal delay={200}>
+          <div className="flex flex-wrap justify-center gap-3 mt-10">
+            {['Hook length', 'Cut rhythm', 'B-roll ratio', 'Drop-off point'].map((label) => (
+              <span
+                key={label}
+                className="text-sm font-medium px-4 py-2 rounded-full"
+                style={{ backgroundColor: 'rgba(250,248,244,0.15)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', border: '1px solid rgba(250,248,244,0.30)', color: 'rgba(250,248,244,0.92)' }}
+              >
+                {label}
+              </span>
+            ))}
           </div>
         </Reveal>
       </div>
