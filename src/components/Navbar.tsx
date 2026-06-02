@@ -7,7 +7,6 @@ const pillLinks = [
   { href: '/#edit',     label: 'Edit' },
   { href: '/for-teams', label: 'For Teams' },
   { href: '/pricing',   label: 'Pricing' },
-  { href: '/roadmap',   label: 'Roadmap' },
 ]
 
 const mobileLinks = [
@@ -18,7 +17,6 @@ const mobileLinks = [
   { href: '/#publish',        label: 'Smart Publish' },
   { href: '/for-teams',       label: 'For Teams' },
   { href: '/pricing',         label: 'Pricing' },
-  { href: '/roadmap',         label: 'Roadmap' },
 ]
 
 const NAV_H = 64        // px — single-row bar height

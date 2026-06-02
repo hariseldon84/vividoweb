@@ -4,7 +4,6 @@ import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
 import { Home } from './pages/Home'
 import { ForTeams } from './pages/ForTeams'
-import { Roadmap } from './pages/Roadmap'
 import { Pricing } from './pages/Pricing'
 import { EarlyAccess } from './pages/EarlyAccess'
 import { Privacy } from './pages/Privacy'
@@ -24,7 +23,6 @@ function Layout() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/for-teams" element={<ForTeams />} />
-        <Route path="/roadmap" element={<Roadmap />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/early-access" element={<EarlyAccess />} />
         <Route path="/privacy" element={<Privacy />} />
