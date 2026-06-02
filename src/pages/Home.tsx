@@ -527,7 +527,7 @@ export function Home() {
           </Reveal>
           <Reveal delay={200}>
             <p className="mt-6 text-lg max-w-lg mx-auto" style={{ color: '#4b5b47' }}>
-              Join the waitlist. Lock in early access pricing. Refer 3 friends to jump the queue.
+              Join the waitlist. Lock in early access pricing.
             </p>
           </Reveal>
           <Reveal delay={300}>

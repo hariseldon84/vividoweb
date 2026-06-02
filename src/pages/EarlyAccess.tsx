@@ -32,8 +32,8 @@ export function EarlyAccess() {
             <div className="grid grid-cols-3 gap-4 mt-8 text-center">
               {[
                 { label: 'Early access pricing', detail: 'Locked on signup' },
-                { label: 'Jump the queue',       detail: 'Refer 3 friends' },
                 { label: 'macOS',                detail: 'Native app' },
+                { label: 'No spam, ever',        detail: 'Email when ready' },
               ].map((item) => (
                 <div key={item.label} className="rounded-xl p-4" style={{ backgroundColor: '#F0EEE8', border: '1px solid #D8D5CC' }}>
                   <p className="text-xs mb-1" style={{ color: '#7a8a76' }}>{item.detail}</p>
