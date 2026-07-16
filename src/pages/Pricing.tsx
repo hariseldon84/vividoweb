@@ -74,7 +74,7 @@ export function Pricing() {
                   ))}
                 </ul>
 
-                <a href="/early-access" className="btn-primary justify-center py-4">
+                <a href="https://yz0i0epjoqe.typeform.com/to/udwohN7N" target="_blank" rel="noopener noreferrer" className="btn-primary justify-center py-4">
                   Join Waitlist → Annual
                 </a>
                 <p className="text-xs text-text-subtle text-center -mt-2">
@@ -130,7 +130,7 @@ export function Pricing() {
                   </li>
                 </ul>
 
-                <a href="/early-access" className="btn-primary justify-center py-4 relative violet-glow">
+                <a href="https://yz0i0epjoqe.typeform.com/to/udwohN7N" target="_blank" rel="noopener noreferrer" className="btn-primary justify-center py-4 relative violet-glow">
                   Join Waitlist → Lifetime
                 </a>
                 <p className="text-xs text-text-subtle text-center -mt-2 relative">

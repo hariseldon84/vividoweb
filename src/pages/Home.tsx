@@ -309,7 +309,7 @@ function ForTeamsSection() {
                 <Link to="/for-teams" className="bg-forest hover:bg-forest-hover text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">
                   Learn more for Teams
                 </Link>
-                <Link to="/early-access" className="text-sm font-medium text-sage hover:text-forest transition-colors">Join waitlist →</Link>
+                <a href="https://yz0i0epjoqe.typeform.com/to/udwohN7N" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-sage hover:text-forest transition-colors">Join waitlist →</a>
               </div>
             </Reveal>
           </div>
@@ -397,15 +397,17 @@ export function Home() {
 
           {/* CTA + platform chip */}
           <div className="flex flex-col items-center gap-3 mt-8">
-            <Link
-              to="/early-access"
+            <a
+              href="https://yz0i0epjoqe.typeform.com/to/udwohN7N"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-white text-sm font-semibold px-7 py-3 rounded-full transition-colors shadow-md"
               style={{ backgroundColor: '#336443' }}
               onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#1a5238')}
               onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#336443')}
             >
               Get Early Access
-            </Link>
+            </a>
             <div
               className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold"
               style={{ backgroundColor: 'rgba(255,255,255,0.70)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', border: '1px solid rgba(51,100,67,0.30)', color: '#336443' }}
@@ -457,9 +459,9 @@ export function Home() {
               Vivido learns your editing style across every project — hook length, cut rhythm, B-roll ratio — and helps you replicate what works.
             </p>
             <div className="flex items-center gap-4 flex-wrap">
-              <Link to="/early-access" className="text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors shadow-sm" style={{ backgroundColor: '#3d5638' }}>
+              <a href="https://yz0i0epjoqe.typeform.com/to/udwohN7N" target="_blank" rel="noopener noreferrer" className="text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors shadow-sm" style={{ backgroundColor: '#3d5638' }}>
                 Get Early Access
-              </Link>
+              </a>
               <Link to="/pricing" className="text-sm font-semibold hover:opacity-80 transition-opacity" style={{ color: '#3d5638' }}>
                 See pricing →
               </Link>

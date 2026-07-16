@@ -159,7 +159,7 @@ export function Changelog() {
             <div className="mt-4 p-6 bg-surface border border-border rounded-2xl text-center">
               <p className="text-sm text-text-muted">
                 New entries ship with every build.{' '}
-                <a href="/early-access" className="text-violet hover:text-fern transition-colors font-medium">
+                <a href="https://yz0i0epjoqe.typeform.com/to/udwohN7N" target="_blank" rel="noopener noreferrer" className="text-violet hover:text-fern transition-colors font-medium">
                   Join the waitlist
                 </a>{' '}
                 to get notified.

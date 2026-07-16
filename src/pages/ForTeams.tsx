@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import BoomerangVideoBg from '../components/BoomerangVideoBg'
 import { Reveal } from '../components/Reveal'
 
@@ -108,15 +107,17 @@ export function ForTeams() {
           </Reveal>
           <Reveal delay={300}>
             <div className="flex flex-col items-center gap-3 mt-8">
-              <Link
-                to="/early-access"
+              <a
+                href="https://yz0i0epjoqe.typeform.com/to/udwohN7N"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white text-sm font-semibold px-7 py-3 rounded-full transition-colors shadow-md"
                 style={{ backgroundColor: MARK_COLOR }}
                 onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#1a5238')}
                 onMouseLeave={e => (e.currentTarget.style.backgroundColor = MARK_COLOR)}
               >
                 Teams — Coming Soon
-              </Link>
+              </a>
             </div>
           </Reveal>
         </div>
@@ -230,15 +231,17 @@ export function ForTeams() {
             <p className="mt-4 mb-8 text-base leading-relaxed" style={{ color: '#4b5b47' }}>
               Join the waitlist and we'll reach out when team access opens.
             </p>
-            <Link
-              to="/early-access"
+            <a
+              href="https://yz0i0epjoqe.typeform.com/to/udwohN7N"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-white text-sm font-semibold px-7 py-3 rounded-full transition-colors shadow-md"
               style={{ backgroundColor: MARK_COLOR }}
               onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#1a5238')}
               onMouseLeave={e => (e.currentTarget.style.backgroundColor = MARK_COLOR)}
             >
               Join the Waitlist
-            </Link>
+            </a>
           </Reveal>
         </div>
       </section>

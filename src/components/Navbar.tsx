@@ -90,15 +90,17 @@ export function Navbar() {
 
           <div className="flex items-center gap-1 pill-nav rounded-full pl-6 pr-1 py-1">
             {navLinks}
-            <Link
-              to="/early-access"
+            <a
+              href="https://yz0i0epjoqe.typeform.com/to/udwohN7N"
+              target="_blank"
+              rel="noopener noreferrer"
               className="ml-2 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors"
               style={{ backgroundColor: MARK_COLOR }}
               onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#1a5238')}
               onMouseLeave={e => (e.currentTarget.style.backgroundColor = MARK_COLOR)}
             >
               Get Early Access
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -161,14 +163,16 @@ export function Navbar() {
             className={`mt-8 transition-all duration-500 ${menuOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
             style={{ transitionDelay: menuOpen ? '700ms' : '0ms' }}
           >
-            <Link
-              to="/early-access"
+            <a
+              href="https://yz0i0epjoqe.typeform.com/to/udwohN7N"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}
               className="block w-full text-center text-white text-sm font-semibold px-5 py-3.5 rounded-full"
               style={{ backgroundColor: MARK_COLOR }}
             >
               Get Early Access
-            </Link>
+            </a>
           </div>
         </div>
       </div>
